@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using backend.Model;
 
-//This is Here cause i needed to upload it onto github
+//This is Here cause i needed to upload it onto github...
 
 var builder = WebApplication.CreateBuilder(args);
 
