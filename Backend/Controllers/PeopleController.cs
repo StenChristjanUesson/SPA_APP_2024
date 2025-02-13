@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Model;
+using System.Xml.Linq;
 
 namespace backend.Controllers;
 
@@ -22,30 +23,30 @@ public class PeopleController : ControllerBase
     [HttpPost]
     public IActionResult Create([FromBody] Person e)
     {
-        var dbPerson = context.PersonList?.Find(e.Id);
+        var dbPerson = context.PersonList?.Find(e.Name);
         if (dbPerson == null)
         {
             context.PersonList?.Add(e);
             context.SaveChanges();
-            return CreatedAtAction(nameof(GetEvents), new { e.Id }, e);
+            return CreatedAtAction(nameof(GetEvents), new { e.Name }, e);
         }
         return Conflict();
     }
     [HttpPut("{id}")]
-    public IActionResult Update(int? id, [FromBody] Person e)
+    public IActionResult Update(string? name, [FromBody] Person e)
     {
-        var dbPerson = context.EventList!.AsNoTracking().FirstOrDefault(PersonInDB => PersonInDB.Id == e.Id);
-        if (id != e.Id || dbPerson == null) return NotFound();
+        var dbPerson = context.PersonList!.AsNoTracking().FirstOrDefault(PersonInDB => PersonInDB.Name == e.Name);
+        if (name != e.Name || dbPerson == null) return NotFound();
         context.Update(e);
         context.SaveChanges();
         return NoContent();
     }
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public IActionResult Delete(Person e)
     {
-        var PersonToDelete = context.EventList?.Find(id);
+        var PersonToDelete = context.PersonList?.Find(e);
         if (PersonToDelete == null) return NotFound();
-        context.EventList?.Remove(PersonToDelete);
+        context.PersonList?.Remove(PersonToDelete);
         context.SaveChanges();
         return NoContent();
     }
