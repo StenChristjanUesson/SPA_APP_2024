@@ -2,7 +2,7 @@
     <div class="about">
       <h1>PersonList</h1>
       <div class="PersonList">
-        <DataTable :value="events" v-if="events.length > 0 ">
+        <DataTable :value="persons" v-if="persons.length > 0 ">
           <Column field="Id" header="Inimese id" style="color: black; "/>
           <Column field="Name" header="Inimese Nimi" style="color: black; "/>
           <Column field="PhoneNumber" header="Inimese PhoneNumber" style="color: black; "/>
@@ -14,7 +14,7 @@
   
   
   <script setup lang="ts">
-  import { type Person } from '@/models/Person';
+  import { type People } from '@/models/Person';
   import { usePersonsStore } from "@/stores/PersonStore";
   import { storeToRefs } from "pinia";
   import { defineProps, onMounted, watch, ref  } from "vue";
@@ -29,8 +29,8 @@
   }, { deep: true });
   
   defineProps<{ title: String }>();
-  const PersonStore = usePersonStore();
-  const { Person } = storeToRefs(PersonStore);
+  const PersonStore = usePersonsStore();
+  const { persons } = storeToRefs(PersonStore);
   
   onMounted(async () => {
     PersonStore.load();

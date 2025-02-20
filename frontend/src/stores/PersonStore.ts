@@ -17,7 +17,7 @@ export const usePersonsStore = defineStore('personsStore', () => {
     return [];
   };
 
-  const load = async () => {
+  const load = async() => {
     allPersons = await loadPersons();
     persons.value = allPersons;
   };
@@ -38,7 +38,7 @@ export const usePersonsStore = defineStore('personsStore', () => {
     
     await apiAddPerson.request();
     if (apiAddPerson.response.value) {
-      load();      
+        load();
     }
   };
 
@@ -66,7 +66,7 @@ export const usePersonsStore = defineStore('personsStore', () => {
     const res = await deletePersonRequest();
 
     if (res.status === 204) {
-      let id = persons.value.indexOf(person);
+      const id = persons.value.indexOf(person);
       
       if (id !== -1) {
         persons.value.splice(id, 1);
