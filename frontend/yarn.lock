@@ -1137,7 +1137,7 @@ asynckit@^0.4.0:
   resolved "https://registry.npmmirror.com/asynckit/-/asynckit-0.4.0.tgz"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-axios@^1.6.8:
+axios@^1.7.4:
   version "1.7.9"
   resolved "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz"
   integrity sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==
@@ -3376,14 +3376,14 @@ vite-plugin-inspect@0.8.9:
     sirv "^3.0.0"
 
 vite-plugin-mkcert@^1.17.5:
-  version "1.17.5"
-  resolved "https://registry.npmmirror.com/vite-plugin-mkcert/-/vite-plugin-mkcert-1.17.5.tgz"
-  integrity sha512-KKGY3iHx/9zb7ow8JJ+nLN2HiNIBuPBwj34fJ+jAJT89/8qfk7msO7G7qipR8VDEm9xMCys0xT11QOJbZcg3/Q==
+  version "1.17.6"
+  resolved "https://registry.npmjs.org/vite-plugin-mkcert/-/vite-plugin-mkcert-1.17.6.tgz"
+  integrity sha512-4JR1RN0HEg/w17eRQJ/Ve2pSa6KCVQcQO6yKtIaKQCFDyd63zGfXHWpygBkvvRSpqa0GcqNKf0fjUJ0HiJQXVQ==
   dependencies:
-    "@octokit/rest" "^20.0.2"
-    axios "^1.6.8"
-    debug "^4.3.4"
-    picocolors "^1.0.0"
+    "@octokit/rest" "^20.1.1"
+    axios "^1.7.4"
+    debug "^4.3.6"
+    picocolors "^1.0.1"
 
 vite-plugin-vue-devtools@^7.3.1:
   version "7.7.2"
