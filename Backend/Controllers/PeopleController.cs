@@ -23,20 +23,20 @@ public class PeopleController : ControllerBase
     [HttpPost]
     public IActionResult Create([FromBody] Person e)
     {
-        var dbPerson = context.PersonList?.Find(e.Name);
+        var dbPerson = context.PersonList?.Find(e.Id);
         if (dbPerson == null)
         {
             context.PersonList?.Add(e);
             context.SaveChanges();
-            return CreatedAtAction(nameof(GetEvents), new { e.Name }, e);
+            return CreatedAtAction(nameof(GetEvents), new { e.Id }, e);
         }
         return Conflict();
     }
     [HttpPut("{id}")]
-    public IActionResult Update(string? name, [FromBody] Person e)
+    public IActionResult Update(int? id, [FromBody] Person e)
     {
-        var dbPerson = context.PersonList!.AsNoTracking().FirstOrDefault(PersonInDB => PersonInDB.Name == e.Name);
-        if (name != e.Name || dbPerson == null) return NotFound();
+        var dbPerson = context.PersonList!.AsNoTracking().FirstOrDefault(PersonInDB => PersonInDB.Id == e.Id);
+        if (id != e.Id || dbPerson == null) return NotFound();
         context.Update(e);
         context.SaveChanges();
         return NoContent();
