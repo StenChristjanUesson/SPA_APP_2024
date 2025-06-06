@@ -14,13 +14,13 @@ public class PeopleController : ControllerBase
     {
         context = c;
     }
-    [HttpGet]
+    [HttpGet] 
     public IActionResult GetEvents()
     {
-        var People = context.PersonList!.AsQueryable();
-        return Ok(People);
+        var person = context.PersonList!.AsQueryable();
+        return Ok(person);
     }
-    [HttpPost]
+    [HttpPost] 
     public IActionResult Create([FromBody] Person e)
     {
         var dbPerson = context.PersonList?.Find(e.Id);
@@ -32,7 +32,7 @@ public class PeopleController : ControllerBase
         }
         return Conflict();
     }
-    [HttpPut("{id}")]
+    [HttpPut("{id}")] 
     public IActionResult Update(int? id, [FromBody] Person e)
     {
         var dbPerson = context.PersonList!.AsNoTracking().FirstOrDefault(PersonInDB => PersonInDB.Id == e.Id);
@@ -41,15 +41,13 @@ public class PeopleController : ControllerBase
         context.SaveChanges();
         return NoContent();
     }
-    [HttpDelete("{id}")]
-    public IActionResult Delete(Person e)
+    [HttpDelete("{id}")] 
+    public IActionResult Delete(int id)
     {
-        var PersonToDelete = context.PersonList?.Find(e);
+        var PersonToDelete = context.PersonList?.Find(id);
         if (PersonToDelete == null) return NotFound();
         context.PersonList?.Remove(PersonToDelete);
         context.SaveChanges();
         return NoContent();
     }
-
 }
-
