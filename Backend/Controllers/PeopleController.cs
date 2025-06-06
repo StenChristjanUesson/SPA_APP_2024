@@ -15,29 +15,29 @@ public class PeopleController : ControllerBase
         context = c;
     }
     [HttpGet] 
-    public IActionResult GetEvents()
+    public IActionResult GetPerson()
     {
-        var person = context.PersonList!.AsQueryable();
-        return Ok(person);
+        var people = context.PersonList!.AsQueryable();
+        return Ok(people);
     }
     [HttpPost] 
-    public IActionResult Create([FromBody] Person e)
+    public IActionResult Create([FromBody] Person p)
     {
-        var dbPerson = context.PersonList?.Find(e.Id);
+        var dbPerson = context.PersonList?.Find(p.Id);
         if (dbPerson == null)
         {
-            context.PersonList?.Add(e);
+            context.PersonList?.Add(p);
             context.SaveChanges();
-            return CreatedAtAction(nameof(GetEvents), new { e.Id }, e);
+            return CreatedAtAction(nameof(GetPerson), new { p.Id }, p);
         }
         return Conflict();
     }
     [HttpPut("{id}")] 
-    public IActionResult Update(int? id, [FromBody] Person e)
+    public IActionResult Update(int? id, [FromBody] Person p)
     {
-        var dbPerson = context.PersonList!.AsNoTracking().FirstOrDefault(PersonInDB => PersonInDB.Id == e.Id);
-        if (id != e.Id || dbPerson == null) return NotFound();
-        context.Update(e);
+        var dbPerson = context.PersonList!.AsNoTracking().FirstOrDefault(PersonInDB => PersonInDB.Id == p.Id);
+        if (id != p.Id || dbPerson == null) return NotFound();
+        context.Update(p);
         context.SaveChanges();
         return NoContent();
     }
