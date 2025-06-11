@@ -7,10 +7,10 @@ namespace backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PeopleController : ControllerBase
+public class PersonController : ControllerBase
 {
     private readonly DataContext context;
-    public PeopleController(DataContext c)
+    public PersonController(DataContext c)
     {
         context = c;
     }

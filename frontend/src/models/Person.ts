@@ -1,10 +1,5 @@
 export interface Person {
-    id: number;
-    Name: string;
-    PhoneNumber: number;
-  }
-  
-  export interface People {
-    People: Person[];
-  }
-  
+  id: number;
+  name: string | null;
+  phoneNumber: string | null;
+}
