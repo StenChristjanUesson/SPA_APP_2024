@@ -21,6 +21,7 @@ export const useEventsStore = defineStore('eventsStore', () => {
     allEvents = await loadEvents();
     events.value = allEvents;
   };
+  
   const getEventById = (id: Number) => {
     return allEvents.find((event) => event.id === id);
   };

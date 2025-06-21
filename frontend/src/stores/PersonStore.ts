@@ -1,4 +1,4 @@
-import { type Person } from "@/models/Person";
+import { type Person } from "@/models/person";
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import useApi, { useApiRawRequest } from "@/models/api";
@@ -10,7 +10,11 @@ export const usePersonsStore = defineStore('PersonsStore', () => {
 
   const loadPersons = async () => {
     await apiGetPersons.request();
-    return apiGetPersons.response.value ?? [];
+    
+    if (apiGetPersons.response.value) {
+      return apiGetPersons.response.value;
+    }
+    return [];
   };
 
   const load = async () => {

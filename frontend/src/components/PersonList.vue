@@ -14,7 +14,7 @@
   
   
   <script setup lang="ts">
-  import { type People } from '@/models/Person';
+  import { type Person } from '@/models/person';
   import { usePersonsStore } from "@/stores/PersonStore";
   import { storeToRefs } from "pinia";
   import { defineProps, onMounted, watch, ref  } from "vue";
