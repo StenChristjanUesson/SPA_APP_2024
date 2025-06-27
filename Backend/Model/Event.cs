@@ -1,3 +1,5 @@
+using Backend.Model;
+
 namespace backend.Model;
 
 public record Event{
@@ -6,4 +8,5 @@ public record Event{
     public string? Description {get; set;}
     public string? Location {get; set;}
     public DateTime Date {get; set;}
+    public List<User> RegisteredUsers {get; set;}
 }

@@ -1,14 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using backend.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.Controllers;
 
-[ApiController] [Route("api/[controller]")] 
+[ApiController] 
+[Route("api/[controller]")]
+[Authorize]
 public class EventsController : ControllerBase {
     private readonly DataContext context;
     public EventsController(DataContext c)  {
         context = c;
+    }
+    [HttpPost("reg_event")]
+    public IActionResult RegisterToEvent(string username, int eID)
+    {
+        var exists = context.EventList.FirstOrDefault(e => e.Id == eID);
+        if (exists == null) return BadRequest("No such event!");
+        var user = context.Users.FirstOrDefault(u=>u.Username == username);
+        if (user == null) return BadRequest("No such user to register");
+        exists.RegisteredUsers.Add(user);
+        context.SaveChanges();
+        return Ok("Success!");
     }
     [HttpGet] public IActionResult GetEvents() {        
         var events = context.EventList!.AsQueryable();

@@ -7,7 +7,7 @@ export interface UseableApi<T> {
   request: ApiRequest;
 }
 
-let apiUrl = '';
+export let apiUrl = '';
 
 export function setApiUrl(url: string) {
   apiUrl = url;

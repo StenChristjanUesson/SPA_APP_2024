@@ -4,12 +4,9 @@
         <Message v-if="failedLogin" severity="error" v-text="errMsg"></Message>
         <br>
         <InputText name="username" type="text" placeholder="Username" v-model="addName"/><br><br>
-        <InputText name="username" type="password" placeholder="Password" v-model="addPass"/><br><br>
-        <Button type="submit" severity="secondary" label="Login" @click="Login"/><br><br>
-        <Button type="submit" severity="secondary" label="Register" @click="Register"/>
-      </div>
-      <div v-if="jwtToken">
-        <Button type="submit" severity="secondary" label="Logout" @click="Logout"/>
+        <InputText name="password" type="password" placeholder="Password" v-model="addPass"/><br><br>
+        <Button type="submit" severity="secondary" label="Register" @click="Register"/><br><br>
+        <Button type="submit" severity="secondary" label="Login" @click="Login"/>
       </div>
 </div>
 </template>
@@ -27,15 +24,11 @@ let failedLogin = ref(false);
 let errMsg = ref('')
 const router = useRouter()
 const jwtToken = computed(() => !!localStorage.getItem("jwt"))
-function Logout(){
-  localStorage.removeItem('jwt');
-  router.go()
+if(localStorage.getItem("jwt")){
+    router.push("/")
 }
 function Register(){
-  router.push("/register")
-}
-function Login(){
-  const resp = fetch(apiUrl+"Auth/login"+"?username="+addName.value + "&password=" + addPass.value,{
+  const resp = fetch(apiUrl+"Auth/register"+"?username="+addName.value + "&password=" + addPass.value,{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -44,12 +37,8 @@ function Login(){
         if(resp.status === 200){
           return resp.json()
         }
-        else if (resp.status === 404){
-          errMsg.value = "That user doesnt exist!"
-          failedLogin.value = true
-        }
-        else if (resp.status == 401){
-          errMsg.value = "Invalid username or password"
+        else if (resp.status === 400){
+          errMsg.value = "That username already exists!"
           failedLogin.value = true
         }
       }).catch((error) => {
@@ -61,5 +50,8 @@ function Login(){
           localStorage.setItem("username",jason.name)
           router.go()
     }));
+}
+function Login(){
+    router.push("/")
 }
 </script>
